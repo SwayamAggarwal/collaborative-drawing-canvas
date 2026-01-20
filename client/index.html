@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborative Drawing Canvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <div class="header-content">
+                <h1 class="title">Collaborative Canvas</h1>
+                <div class="user-info">
+                    <div class="status-indicator online"></div>
+                    <span id="userCount">0 users online</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-container">
+            <aside class="toolbar">
+                <section class="tool-section">
+                    <h3>Tools</h3>
+                    <div class="tool-buttons">
+                        <button id="brushTool" class="tool-btn active" data-tool="brush">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"></path>
+                                <path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"></path>
+                            </svg>
+                            Brush
+                        </button>
+                        <button id="eraserTool" class="tool-btn" data-tool="eraser">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"></path>
+                                <path d="M22 21H7"></path>
+                                <path d="m5 11 9 9"></path>
+                            </svg>
+                            Eraser
+                        </button>
+                    </div>
+                </section>
+
+                <section class="tool-section">
+                    <h3>Color</h3>
+                    <div class="color-grid" id="colorPalette">
+                        <!-- Colors will be added by JavaScript -->
+                    </div>
+                    <input type="color" id="customColor" class="custom-color-picker">
+                </section>
+
+                <section class="tool-section">
+                    <h3>Brush Size: <span id="brushSizeValue">5</span>px</h3>
+                    <input type="range" id="brushSize" min="1" max="50" value="5" class="slider">
+                    <div class="brush-preview">
+                        <div id="brushPreview" class="preview-circle"></div>
+                    </div>
+                </section>
+
+                <section class="tool-section">
+                    <h3>Actions</h3>
+                    <button id="undoBtn" class="action-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 7v6h6"></path>
+                            <path d="M21 17a9 9 0 0 0-9-9 9 9 0 0 0-6 2.3L3 13"></path>
+                        </svg>
+                        Undo
+                    </button>
+                    <button id="redoBtn" class="action-btn">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 7v6h-6"></path>
+                            <path d="M3 17a9 9 0 0 1 9-9 9 9 0 0 1 6 2.3l3 2.7"></path>
+                        </svg>
+                        Redo
+                    </button>
+                    <button id="clearBtn" class="action-btn danger">Clear Canvas</button>
+                </section>
+
+                <section class="tool-section users-section">
+                    <h3>Active Users</h3>
+                    <div id="usersList" class="users-list">
+                        <!-- Users will be added by JavaScript -->
+                    </div>
+                </section>
+            </aside>
+
+            <main class="canvas-container">
+                <div class="canvas-wrapper">
+                    <canvas id="drawingCanvas"></canvas>
+                    <div id="cursorsLayer" class="cursors-layer"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.socket.io/4.6.0/socket.io.min.js"></script>
+    <script src="canvas.js"></script>
+    <script src="websocket.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
